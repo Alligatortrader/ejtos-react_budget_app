@@ -30,7 +30,7 @@ export const AppReducer = (state, action) => {
                     ...state
                 }
             }
-            case 'RED_EXPENSE':
+         case 'RED_EXPENSE':
                 const red_expenses = state.expenses.map((currentExp)=> {
                     if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
                         currentExp.cost =  currentExp.cost - action.payload.cost;
@@ -58,9 +58,21 @@ export const AppReducer = (state, action) => {
                 budget
             };
         case 'SET_BUDGET':
+            let total_expenses = 0;
+            total_expenses = state.expenses.reduce(
+                (previousExp, currentExp) => {
+                    return previousExp + currentExp.cost
+                },0
+            );
+            if (action.payload > 20000){
+                alert("Budget upper limit exceeded"); 
+            }
+            if (action.payload < total_expenses){
+                alert("You cannot reduce the budget value lower than the spending");
+            } else{
             action.type = "DONE";
             state.budget = action.payload;
-
+            }
             return {
                 ...state,
             };
