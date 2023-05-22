@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
-//import Select from 'react-select'
 import  './Currency.css';
 const currency = () => {
   const {dispatch}= useContext(AppContext);
